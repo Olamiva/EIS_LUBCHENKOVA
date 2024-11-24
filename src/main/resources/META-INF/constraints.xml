@@ -1,0 +1,54 @@
+<constraint-mappings xmlns="http://jboss.org/xml/ns/javax/validation/mapping"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://jboss.org/xml/ns/javax/validation/mapping validation-mapping-1.1.xsd"
+                     version="1.1">
+    <bean class="Lab4_Validation.Model.XmlValidatedRailway" ignore-annotations="false">
+        <field name="name">
+            <constraint annotation="jakarta.validation.constraints.NotNull">
+                <message>Название железной дороги не должно быть пустым</message>
+            </constraint>
+            <constraint annotation="jakarta.validation.constraints.Pattern">
+                <message>Название может содержать только буквы и пробелы</message>
+                <element name="regexp">^[А-Яа-яA-Za-z\s]+$</element>
+            </constraint>
+        </field>
+        <field name="country">
+            <constraint annotation="jakarta.validation.constraints.NotNull">
+                <message>Страна не должна быть пустой</message>
+            </constraint>
+            <constraint annotation="jakarta.validation.constraints.Pattern">
+                <message>Страна может содержать только буквы и пробелы</message>
+                <element name="regexp">^[А-Яа-яA-Za-z\s]+$</element>
+            </constraint>
+        </field>
+        <field name="stationCount">
+            <constraint annotation="jakarta.validation.constraints.Min">
+                <message>Количество станций должно быть больше 0</message>
+                <element name="value">1</element>
+            </constraint>
+            <constraint annotation="jakarta.validation.constraints.Max">
+                <message>Количество станций не может превышать 1000</message>
+                <element name="value">1000</element>
+            </constraint>
+        </field>
+        <field name="lengthKm">
+            <constraint annotation="jakarta.validation.constraints.Min">
+                <message>Протяженность должна быть больше 10 км</message>
+                <element name="value">10</element>
+            </constraint>
+            <constraint annotation="jakarta.validation.constraints.Max">
+                <message>Протяженность не может превышать 10000 км</message>
+                <element name="value">10000</element>
+            </constraint>
+        </field>
+        <field name="trackType">
+            <constraint annotation="jakarta.validation.constraints.NotNull">
+                <message>Тип пути не должен быть пустым</message>
+            </constraint>
+            <constraint annotation="jakarta.validation.constraints.Pattern">
+                <message>Тип пути должен быть 'электрифицированный' или 'неэлектрифицированный'</message>
+                <element name="regexp">^(электрифицированный|неэлектрифицированный)$</element>
+            </constraint>
+        </field>
+    </bean>
+</constraint-mappings>
