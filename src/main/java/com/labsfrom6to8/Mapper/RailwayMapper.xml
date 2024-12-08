@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.Mapper.RailwayMapper">
+
+    <insert id="insertRailway" parameterType="com.example.Model.Railway">
+        INSERT INTO railways (name, length_km, country, is_operational)
+        VALUES (#{name}, #{lengthKm}, #{country}, #{isOperational})
+    </insert>
+
+    <update id="updateRailway" parameterType="com.example.Model.Railway">
+        UPDATE railways
+        SET name = #{name},
+            length_km = #{lengthKm},
+            country = #{country},
+            is_operational = #{isOperational}
+        WHERE id = #{id}
+    </update>
+
+    <resultMap id="RailwayResultMap" type="com.example.Model.Railway">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="lengthKm" column="length_km"/>
+        <result property="country" column="country"/>
+        <result property="isOperational" column="is_operational"/>
+    </resultMap>
+
+    <select id="selectAllRailways" resultMap="RailwayResultMap">
+        SELECT * FROM railways
+    </select>
+
+    <delete id="deleteRailway" parameterType="Long">
+        DELETE FROM railways
+        WHERE id = #{id}
+    </delete>
+</mapper>
