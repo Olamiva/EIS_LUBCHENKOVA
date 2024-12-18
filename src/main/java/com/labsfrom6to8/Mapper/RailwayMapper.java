@@ -16,7 +16,9 @@ public interface RailwayMapper {
 
     @Select("SELECT * FROM railways")
     @Results({
+            @Result(property = "id", column = "id"),
             @Result(property = "lengthKm", column = "length_km"),
+            @Result(property = "country", column = "country"),
             @Result(property = "isOperational", column = "is_operational")
     })
     List<Railway> selectAllRailways();

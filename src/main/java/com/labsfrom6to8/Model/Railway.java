@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Railway {
 
+    @JsonProperty("id")
     private Long id;
 
     @JsonProperty("name")
