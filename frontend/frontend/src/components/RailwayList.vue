@@ -3,8 +3,9 @@
     <h2>Список железнодорожных путей</h2>
     <ul>
       <li v-for="railway in railways" :key="railway.id">
-        {{ railway.name }} ({{ railway.length_km }} км, {{ railway.country }})
-        <span v-if="railway.is_operational">[Оперативный]</span>
+        {{ railway.name }} ({{ railway.country }}) - Длина: {{ railway.length_km }} км.
+        В эксплуатации: {{ railway.is_operational ? "Да" : "Нет" }}
+        <button @click="$emit('edit', railway)">Редактировать</button>
         <button @click="deleteRailway(railway.id)">Удалить</button>
       </li>
     </ul>
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-import railwayService from '@/services/railwayService';
+import railwayService from "@/services/railwayService";
 
 export default {
   data() {
@@ -22,15 +23,14 @@ export default {
   },
   methods: {
     async fetchRailways() {
-      const response = await railwayService.getRailways();
-      this.railways = response.data;
+      this.railways = (await railwayService.getRailways()).data;
     },
     async deleteRailway(id) {
       await railwayService.deleteRailway(id);
       this.fetchRailways();
     },
   },
-  created() {
+  mounted() {
     this.fetchRailways();
   },
 };
